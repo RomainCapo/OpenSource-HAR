@@ -49,8 +49,11 @@ jobs:
       - name: Build Docker image
         run : |
           mlflow models build-docker -m "$(cat artifact_location.txt)" -n "$IMAGE_NAME"
+      - name: Tag image
+        run: |
+          docker tag $IMAGE_NAME $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_NAME
       - name: Push Docker image to ECR
         run: |
-          docker push rnn-model-image $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_NAME
+          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_NAME
 
       
