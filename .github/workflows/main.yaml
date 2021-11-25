@@ -9,6 +9,15 @@ on:
 
 name: OpenSource Stack Ci/Cd
 
+env:
+ AWS_DEFAULT_REGION: us-east-2
+AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+DATABASE_IMAGE: zumbacafew:database_${{ github.sha }}
+BACKEND_IMAGE: zumbacafew:backend_${{ github.sha }}
+FRONTEND_IMAGE: zumbacafew:frontend_${{ github.sha }}
+
 jobs: 
   run_cicd:
     name: "Run Ci/Cd"
@@ -41,6 +50,9 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
       - name: Build Docker image
         run : |
-          mlflow models build-docker -m "$(cat artifact_location.txt)"
+          mlflow models build-docker -m "$(cat artifact_location.txt)" -n "rnn-model-image"
+      - name: Push Docker image to ECR
+        run: |
+          docker push rnn-model-image
 
       
