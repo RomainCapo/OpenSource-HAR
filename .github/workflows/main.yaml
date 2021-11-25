@@ -41,5 +41,6 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
       - name: Build Docker image
         run : |
-          mlflow models build-docker -m "s3://mlflow-artifacts-424710357996/1/94ed16417bf745b7869f7948653eaefe/artifacts/rnn-model"
+          echo ${{ cat artifact_location.txt }}
+          mlflow models build-docker -m "${{ cat artifact_location.txt }}"
       
