@@ -184,3 +184,4 @@ if __name__ == "__main__":
           mlflow.keras.log_model(model, "rnn-model",signature=signature, input_example=input_example,registered_model_name="rnn-model")
         else:
          mlflow.keras.log_model(model, "rnn-model",signature=signature, input_example=input_example)
+         raise ValueError("The tests on the models did not pass or the required accuracy was not achieved.")
