@@ -22,7 +22,7 @@ if len(sys.argv) != 2:
 
 # Test data set split ratio
 window = params["window"]
-overlap = params["overlap"]
+overlap = params["overlap"] 
 
 input = sys.argv[1]
 output_x_data = os.path.join("data", "prepared", "x_data.npy")
