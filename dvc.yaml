@@ -1,0 +1,30 @@
+stages:
+  preprocess:
+    cmd: python preprocess.py data/PPG_ACC_dataset
+    deps:
+    - data/PPG_ACC_dataset
+    - preprocess.py
+    params:
+    - preprocess.overlap
+    - preprocess.window
+    outs:
+    - data/prepared
+  train_test_evaluate:
+    cmd: python train_test_evaluate.py data/prepared
+    deps:
+    - data/prepared
+    - train_test_evaluate.py
+    params:
+    - train_test_evaluate.accuracy_thresold
+    - train_test_evaluate.dropout_rate
+    - train_test_evaluate.epochs
+    - train_test_evaluate.learning_rate
+    - train_test_evaluate.num_cell_dense1
+    - train_test_evaluate.num_cell_lstm1
+    - train_test_evaluate.num_cell_lstm2
+    - train_test_evaluate.num_cell_lstm3
+    - train_test_evaluate.overlap
+    - train_test_evaluate.test_subjects
+    - train_test_evaluate.train_subjects
+    - train_test_evaluate.validation_subjects
+    - train_test_evaluate.window

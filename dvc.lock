@@ -1,0 +1,70 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python preprocess.py data/PPG_ACC_dataset
+    deps:
+    - path: data/PPG_ACC_dataset
+      md5: 13003bc220d37c3f965c4123072f17a4.dir
+      size: 50912445
+      nfiles: 420
+    - path: preprocess.py
+      md5: 25edcd4f05a3ca99a5163d97e87a8960
+      size: 6763
+    params:
+      params.yaml:
+        preprocess.overlap: 600
+        preprocess.window: 1200
+    outs:
+    - path: data/prepared
+      md5: bd31f6feb9744216875cddab4a2a8d68.dir
+      size: 858534464
+      nfiles: 3
+  train:
+    cmd: python train.py data/prepared
+    deps:
+    - path: data/prepared
+      md5: bd31f6feb9744216875cddab4a2a8d68.dir
+      size: 858534464
+      nfiles: 3
+    - path: train.py
+      md5: b64451edb566153d05bcc471466518a9
+      size: 6820
+    params:
+      params.yaml:
+        train.dropout_rate: 0.01
+        train.epochs: 1
+        train.learning_rate: 0.01
+        train.num_cell_dense1: 32
+        train.num_cell_lstm1: 32
+        train.num_cell_lstm2: 32
+        train.num_cell_lstm3: 32
+        train.overlap: 600
+        train.test_subjects: 5-6
+        train.train_subjects: 0-1-2-3
+        train.validation_subjects: '4'
+        train.window: 1200
+  train_test_evaluate:
+    cmd: python train_test_evaluate.py data/prepared
+    deps:
+    - path: data/prepared
+      md5: bd31f6feb9744216875cddab4a2a8d68.dir
+      size: 858534464
+      nfiles: 3
+    - path: train_test_evaluate.py
+      md5: 74b0fd190b4a861c37ec3b63008ee7c8
+      size: 7922
+    params:
+      params.yaml:
+        train_test_evaluate.accuracy_thresold: 0.3
+        train_test_evaluate.dropout_rate: 0.01
+        train_test_evaluate.epochs: 1
+        train_test_evaluate.learning_rate: 0.01
+        train_test_evaluate.num_cell_dense1: 32
+        train_test_evaluate.num_cell_lstm1: 32
+        train_test_evaluate.num_cell_lstm2: 32
+        train_test_evaluate.num_cell_lstm3: 32
+        train_test_evaluate.overlap: 600
+        train_test_evaluate.test_subjects: 5-6
+        train_test_evaluate.train_subjects: 0-1-2-3
+        train_test_evaluate.validation_subjects: '4'
+        train_test_evaluate.window: 1200
