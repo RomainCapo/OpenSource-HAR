@@ -30,9 +30,9 @@ jobs:
           aws-region: us-east-2
       - name: Pull latest data
         run: |
-          dvc pull
           mkdir data/PGG_ACC_dataset
           mkdir data/prepared
+          dvc pull
           ls data/PPG_ACC_dataset
       - name: Execute DVC pipeline
         run: |
