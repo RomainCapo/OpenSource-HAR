@@ -31,6 +31,8 @@ jobs:
       - name: Pull latest data
         run: |
           dvc pull
+          mkdir data/PGG_ACC_dataset
+          mkdir data/prepared
           ls data/PPG_ACC_dataset
       - name: Execute DVC pipeline
         run: |
