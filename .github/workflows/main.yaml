@@ -41,5 +41,6 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
       - name: Build Docker image
         run : |
-          echo $(cat artifact_location.txt)
+          mlflow models build-docker -m "$(cat artifact_location.txt)"
+
       
