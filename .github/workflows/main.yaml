@@ -22,6 +22,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install dvc[s3]
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -30,7 +31,6 @@ jobs:
           aws-region: us-east-2
       - name: Pull latest data
         run: |
-          mkdir data/PGG_ACC_dataset
           dvc pull
           ls data/PPG_ACC_dataset
       - name: Execute DVC pipeline
