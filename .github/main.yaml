@@ -1,0 +1,38 @@
+# build.yml
+on:
+  pull_request:
+    branches:        
+    - main        
+  push:
+    branches:
+    - main
+
+name: OpenSource Stack Ci/Cd
+
+jobs: 
+  run_cicd:
+    name: "Run Ci/Cd"
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v2"
+      - uses: "actions/setup-python@v2"
+        with:
+          python-version: 3.8
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+      - name: Pull latest data
+        run: |
+          dvc pull
+          ls data/PPG_ACC_dataset
+      - name: Execute DVC pipeline
+        run: |
+          dvc repro
+      
