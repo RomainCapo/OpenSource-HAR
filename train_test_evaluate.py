@@ -181,7 +181,16 @@ if __name__ == "__main__":
         input_example = np.expand_dims(x_data_train[0], axis=0)
 
         if not False in test_result and accuracy >= hyperparameters["accuracy_thresold"]: 
-          mlflow.keras.log_model(model, "rnn-model",signature=signature, input_example=input_example,registered_model_name="rnn-model")
+          mlflow.keras.log_model(model, model_name,signature=signature, input_example=input_example,registered_model_name=model_name)
+
+          run = mlflow.active_run()
+
+          artifact_file = "artifact_location.txt"
+          if os.path.exists(artifact_file):
+            os.remove(artifact_file)
+
+          with open(artifact_file,"w+") as f:
+            f.write(run.info.artifact_uri + "/" + model_name)
         else:
-         mlflow.keras.log_model(model, "rnn-model",signature=signature, input_example=input_example)
+         mlflow.keras.log_model(model, model_name,signature=signature, input_example=input_example)
          raise ValueError("The tests on the models did not pass or the required accuracy was not achieved.")

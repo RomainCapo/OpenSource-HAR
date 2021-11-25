@@ -1,0 +1,1 @@
+s3://mlflow-artifacts-424710357996/1/898ff8ccb36641529e8f58065780cb9e/artifacts/rnn-model
