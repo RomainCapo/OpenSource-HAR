@@ -11,12 +11,10 @@ name: OpenSource Stack Ci/Cd
 
 env:
  AWS_DEFAULT_REGION: us-east-2
-AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-DATABASE_IMAGE: zumbacafew:database_${{ github.sha }}
-BACKEND_IMAGE: zumbacafew:backend_${{ github.sha }}
-FRONTEND_IMAGE: zumbacafew:frontend_${{ github.sha }}
+ AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+ AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+ AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+ IMAGE_NAME: "rnn-model-image"
 
 jobs: 
   run_cicd:
@@ -35,9 +33,9 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
+          aws-access-key-id: $AWS_ACCESS_KEY_ID
+          aws-secret-access-key: $AWS_SECRET_ACCESS_KEY
+          aws-region: $AWS_DEFAULT_REGION
       - name: Pull latest data
         run: |
           dvc pull
@@ -50,9 +48,9 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
       - name: Build Docker image
         run : |
-          mlflow models build-docker -m "$(cat artifact_location.txt)" -n "rnn-model-image"
+          mlflow models build-docker -m "$(cat artifact_location.txt)" -n "$IMAGE_NAME"
       - name: Push Docker image to ECR
         run: |
-          docker push rnn-model-image
+          docker push rnn-model-image $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_NAME
 
       
