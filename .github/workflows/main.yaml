@@ -14,7 +14,7 @@ env:
  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
- IMAGE_NAME: rnn-model-image:${{ github.sha }}
+ IMAGE_NAME: rnn-model-image:${{ github.sha }} 
 
 jobs: 
   run_cicd:
