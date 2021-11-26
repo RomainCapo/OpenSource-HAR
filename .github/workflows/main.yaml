@@ -14,7 +14,7 @@ env:
  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
- IMAGE_NAME: "rnn-model-image"
+ IMAGE_NAME: rnn-model-image:${{ github.sha }}
 
 jobs: 
   run_cicd:
@@ -25,35 +25,11 @@ jobs:
       - uses: "actions/setup-python@v2"
         with:
           python-version: 3.8
-      - name: Install Python dependencies
+      - name: Install eksctl
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install dvc[s3]
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
-      - name: Pull latest data
+         curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+         sudo mv /tmp/eksctl /usr/local/bin
+         . <(eksctl completion bash)
+      - name: Connect to cluster
         run: |
-          dvc pull
-          ls data/PPG_ACC_dataset
-      - name: Execute DVC pipeline
-        run: |
-          dvc repro -f
-      - name: Log in to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-      - name: Build Docker image
-        run : |
-          mlflow models build-docker -m "$(cat artifact_location.txt)" -n "$IMAGE_NAME"
-      - name: Tag image
-        run: |
-          docker tag $IMAGE_NAME $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_NAME
-      - name: Push Docker image to ECR
-        run: |
-          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_NAME
-
-      
+          eksctl utils write-kubeconfig --cluster=opensource-stack-cluster
