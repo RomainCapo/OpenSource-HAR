@@ -25,6 +25,15 @@ jobs:
       - uses: "actions/setup-python@v2"
         with:
           python-version: 3.8
+      - name: Install eksctl
+        run: |
+         curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+         sudo mv /tmp/eksctl /usr/local/bin
+         . <(eksctl completion bash)
       - name: Connect to cluster
         run: |
           eksctl utils write-kubeconfig --cluster=opensource-stack-cluster
+      - name: Apply new config
+        run: |
+          kubectl get pods -A
+          
