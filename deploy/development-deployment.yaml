@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: development-node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: development-node
+  template:
+    metadata:
+      labels:
+        app: development-node
+    spec:
+      containers:
+        - name: developmeent-node
+          image: 424710357996.dkr.ecr.us-east-2.amazonaws.com/rnn-model-image:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
