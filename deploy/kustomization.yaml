@@ -11,4 +11,4 @@ resources:
 images:
 - name: development-image
   newName: 424710357996.dkr.ecr.us-east-2.amazonaws.com/rnn-model-image
-  newTag: a76f35c88fe6869d4aa181c7a3e85ee260245405
+  newTag: 79bd671eff244c36141680be3063440f3732b8dc
