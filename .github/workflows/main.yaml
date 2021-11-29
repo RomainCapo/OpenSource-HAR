@@ -102,6 +102,7 @@ jobs:
           eksctl utils write-kubeconfig --cluster=opensource-stack-cluster
       - name: Apply new config
         run: |
+          cd deploy
           kubectl apply -k k8s/base
-          kubectl replace --force -f deploy/${{ steps.myref.outputs.branch }}-deployment.yaml
+          kubectl replace --force -f ${{ steps.myref.outputs.branch }}-deployment.yaml
           
