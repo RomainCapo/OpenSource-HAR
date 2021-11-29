@@ -77,7 +77,7 @@ jobs:
           
       - name: Set image tag
         run: |
-            cd deploy
+            cd deploy/${{ steps.myref.outputs.branch }}
             kustomize edit set image ${{ steps.myref.outputs.branch }}-image=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }}
             cat kustomization.yaml
       #- name: Commit kustomization
@@ -102,7 +102,6 @@ jobs:
           eksctl utils write-kubeconfig --cluster=opensource-stack-cluster
       - name: Apply new config
         run: |
-          cd deploy
-          kustomize build
-          kubectl replace --force -f ${{ steps.myref.outputs.branch }}-deployment.yaml
+          cd deploy/${{ steps.myref.outputs.branch }}
+          kustomize build | kubectl replace --force -f -
           

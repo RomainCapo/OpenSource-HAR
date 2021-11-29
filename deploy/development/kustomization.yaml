@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- development-deployment.yaml
+- development-service.yaml
+
+images:
+- name: development-image
+  newName: 424710357996.dkr.ecr.us-east-2.amazonaws.com/rnn-model-image
+  newTag: 79bd671eff244c36141680be3063440f3732b8dc
