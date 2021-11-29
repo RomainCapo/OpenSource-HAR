@@ -45,6 +45,7 @@ hyperparameters["train_subjects"] = tuple(map(int, params["train_subjects"].spli
 hyperparameters["validation_subjects"] = tuple(map(int, params["validation_subjects"].split("-")))
 hyperparameters["test_subjects"] = tuple(map(int, params["test_subjects"].split("-")))
 hyperparameters["accuracy_thresold"] = params["accuracy_thresold"]
+hyperparameters["environment"] = params["environment"]
 
 input = sys.argv[1]
 x_data_input = os.path.join(sys.argv[1], "x_data.npy")
@@ -114,6 +115,26 @@ def partition_data(subjects, subj_inputs, x_data, y_data):
       y_part = np.vstack((y_part, yy))
   return x_part, y_part
 
+def promotes_new_model(stage, model_name):
+    """Archive all model wih the given stage and promotes the last one.
+
+    Args:
+        stage (string): Model stage
+        model_name (string): Model name
+    """
+    mlflowclient = client.MlflowClient()
+    max_version = 0
+
+    for mv in mlflowclient.search_model_versions(f"name='{model_name}'"):
+        current_version = int(dict(mv)['version'])
+        if current_version > max_version:
+            max_version = current_version
+        if dict(mv)['current_stage'] == stage:
+            version = dict(mv)['version']                                   
+            mlflowclient.transition_model_version_stage(model_name, version, stage="Archived")
+
+    mlflowclient.transition_model_version_stage(model_name, max_version, stage=stage)
+
 if __name__ == "__main__":
     mlflow.set_tracking_uri('http://deplo-mlflo-5bgwmw63yikr-a96d79bfc9da58f5.elb.us-east-2.amazonaws.com/')
 
@@ -143,6 +164,7 @@ if __name__ == "__main__":
         mlflow.log_param("window", hyperparameters["window"])
         mlflow.log_param("overlap", hyperparameters["overlap"])
         mlflow.log_param("accuracy_thresold", hyperparameters["accuracy_thresold"])
+        mlflow.log_param("environment", hyperparameters["environment"])
 
         num_classes = len(set(y_data.flatten()))
         num_features = x_data.shape[2]
@@ -191,6 +213,16 @@ if __name__ == "__main__":
 
           with open(artifact_file,"w+") as f:
             f.write(run.info.artifact_uri + "/" + model_name)
+
+          if hyperparameters["environment"] == "development":
+            pass 
+          if hyperparameters["environment"] == "staging":
+            promotes_new_model("Staging", model_name)
+          if hyperparameters["environment"] == "main":
+            promotes_new_model("Production", model_name)
+          if hyperparameters["environment"] == "environement-replace":
+            pass
+
         else:
          mlflow.keras.log_model(model, model_name,signature=signature, input_example=input_example)
          raise ValueError("The tests on the models did not pass or the required accuracy was not achieved.")
