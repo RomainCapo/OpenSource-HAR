@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: production-node
+  name: main-node
 spec:
   type: LoadBalancer
   selector:
-    app: production-node
+    app: main-node
   ports:
   - port: 8080
     targetPort: 8080
-    name: production-node
+    name: main-node

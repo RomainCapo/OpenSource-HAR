@@ -14,7 +14,8 @@ env:
  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
- IMAGE_NAME: rnn-model-image:${{ github.sha }} 
+ BRANCH_NAME: ${{ steps.extract_branch.outputs.branch }}
+ IMAGE_NAME: rnn-model-image:$BRANCH_NAME_${{ github.sha }} 
 
 jobs: 
   run_cicd:
@@ -37,6 +38,10 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
+      - name: Configure pipeline parameters
+        run: |
+         cp params.yaml copy_params.yaml
+         sed -i 's/"environment-replace"/"$BRANCH_NAME"/' params.yaml
       - name: Pull latest data
         run: |
           dvc pull
@@ -44,6 +49,10 @@ jobs:
       - name: Execute DVC pipeline
         run: |
           dvc repro -f
+      -name: Restore default parameters
+        run: |
+          rm params.yaml
+          mv copy_params.yaml params.yaml
           
       - name: Log in to Amazon ECR
         id: login-ecr
@@ -61,19 +70,19 @@ jobs:
       - name: Set image tag
         run: |
             cd deploy
-            kustomize edit set image development-image=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_NAME
+            kustomize edit set image $BRANCH_NAME-image=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_NAME
             cat kustomization.yaml
-      - name: Commit kustomization
-        run: |
-            git config --local user.email "action@github.com"
-            git config --local user.name "GitHub Action"
-            git commit -a -m "${{ github.sha }}"
-      - name: Push changes to main
-        uses: ad-m/github-push-action@master
-        with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            branch: main
-            force: true       
+      #- name: Commit kustomization
+      #  run: |
+      #      git config --local user.email "action@github.com"
+      #      git config --local user.name "GitHub Action"
+      #      git commit -a -m "${{ github.sha }}"
+      #- name: Push changes to current branch
+      #  uses: ad-m/github-push-action@master
+      #  with:
+      #      github_token: ${{ secrets.GITHUB_TOKEN }}
+      #      branch: $BRANCH_MAIN
+      #      force: true       
           
       - name: Install eksctl
         run: |

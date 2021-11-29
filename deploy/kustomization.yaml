@@ -5,10 +5,16 @@ resources:
 - development-service.yaml
 - staging-deployment.yaml
 - staging-service.yaml
-- production-deployment.yaml
-- production-service.yaml
+- main-deployment.yaml
+- main-service.yaml
 
 images:
 - name: development-image
+  newName: 424710357996.dkr.ecr.us-east-2.amazonaws.com/rnn-model-image
+  newTag: 79bd671eff244c36141680be3063440f3732b8dc
+- name: staging-image
+  newName: 424710357996.dkr.ecr.us-east-2.amazonaws.com/rnn-model-image
+  newTag: 79bd671eff244c36141680be3063440f3732b8dc
+- name: main-image
   newName: 424710357996.dkr.ecr.us-east-2.amazonaws.com/rnn-model-image
   newTag: 79bd671eff244c36141680be3063440f3732b8dc

@@ -15,4 +15,4 @@ train_test_evaluate:
    validation_subjects: "4"
    test_subjects: "5-6"
    accuracy_thresold: 0.1
-   environment: "staging"
+   environment: "environment-replace"

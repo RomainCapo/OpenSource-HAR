@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: staging-node
-          image: 424710357996.dkr.ecr.us-east-2.amazonaws.com/rnn-model-image:latest
+          image: staging-image
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

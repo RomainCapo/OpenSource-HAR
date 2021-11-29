@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: production-node
+  name: main-node
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: production-node
+      app: main-node
   template:
     metadata:
       labels:
-        app: production-node
+        app: main-node
     spec:
       containers:
-        - name: production-node
-          image: 424710357996.dkr.ecr.us-east-2.amazonaws.com/rnn-model-image:latest
+        - name: main-node
+          image: main-image
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
