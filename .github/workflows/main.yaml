@@ -103,6 +103,6 @@ jobs:
       - name: Apply new config
         run: |
           cd deploy
-          kubectl apply -k k8s/base
+          kustomize build
           kubectl replace --force -f ${{ steps.myref.outputs.branch }}-deployment.yaml
           
