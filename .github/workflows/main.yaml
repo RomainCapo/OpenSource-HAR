@@ -14,7 +14,6 @@ env:
  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
- BRANCH_NAME: ${GITHUB_REF##*/}
  IMAGE_NAME: rnn-model-image:$BRANCH_NAME_${{ github.sha }} 
 
 jobs: 
@@ -29,7 +28,7 @@ jobs:
           
       - name: test
         run: |
-          echo $BRANCH_NAME
+          echo ${GITHUB_REF##*/}
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
