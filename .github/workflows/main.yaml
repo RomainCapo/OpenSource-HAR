@@ -67,18 +67,18 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
       - name: Build Docker image
         run : |
-          mlflow models build-docker -m "$(cat artifact_location.txt)" -n "rnn-image-model:${{ steps.myref.outputs.branch }}_${{ github.sha }}"
+          mlflow models build-docker -m "$(cat artifact_location.txt)" -n "rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }}"
       - name: Tag image
         run: |
-          docker tag rnn-image-model:${{ steps.myref.outputs.branch }}_${{ github.sha }} $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/rnn-image-model:${{ steps.myref.outputs.branch }}_${{ github.sha }}
+          docker tag rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }} $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }}
       - name: Push Docker image to ECR
         run: |
-          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/rnn-image-model:${{ steps.myref.outputs.branch }}_${{ github.sha }}
+          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }}
           
       - name: Set image tag
         run: |
             cd deploy
-            kustomize edit set image ${{ steps.myref.outputs.branch }}-image=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/rnn-image-model:${{ steps.myref.outputs.branch }}_${{ github.sha }}
+            kustomize edit set image ${{ steps.myref.outputs.branch }}-image=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }}
             cat kustomization.yaml
       #- name: Commit kustomization
       #  run: |
