@@ -14,7 +14,7 @@ env:
  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
- IMAGE_NAME: rnn-model-image:$BRANCH_NAME_${{ github.sha }} 
+ IMAGE_NAME: rnn-model-image:${GITHUB_REF##*/}_${{ github.sha }} 
 
 jobs: 
   run_cicd:
@@ -28,7 +28,7 @@ jobs:
           
       - name: test
         run: |
-          echo ${GITHUB_REF##*/}
+          echo IMAGE_NAME
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
@@ -43,7 +43,7 @@ jobs:
       - name: Configure pipeline parameters
         run: |
          cp params.yaml copy_params.yaml
-         sed -i 's/"environment-replace"/"$BRANCH_NAME"/' params.yaml
+         sed -i 's/"environment-replace"/"${GITHUB_REF##*/}"/' params.yaml
       - name: Pull latest data
         run: |
           dvc pull
@@ -72,7 +72,7 @@ jobs:
       - name: Set image tag
         run: |
             cd deploy
-            kustomize edit set image $BRANCH_NAME-image=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_NAME
+            kustomize edit set image ${GITHUB_REF##*/}-image=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_NAME
             cat kustomization.yaml
       #- name: Commit kustomization
       #  run: |
