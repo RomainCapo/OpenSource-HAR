@@ -49,7 +49,7 @@ jobs:
       - name: Execute DVC pipeline
         run: |
           dvc repro -f
-      -name: Restore default parameters
+      - name: Restore default parameters
         run: |
           rm params.yaml
           mv copy_params.yaml params.yaml
