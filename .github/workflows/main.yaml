@@ -26,14 +26,11 @@ jobs:
       - uses: "actions/setup-python@v2"
         with:
           python-version: 3.8
-          
       - name: Get the current branch name
         shell: bash
         run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
         id: myref      
-      - name: test
-        run: |
-          echo ${{ steps.myref.outputs.branch }}
+
 
       - name: Install Python dependencies
         run: |
@@ -79,18 +76,7 @@ jobs:
         run: |
             cd deploy/${{ steps.myref.outputs.branch }}
             kustomize edit set image ${{ steps.myref.outputs.branch }}-image=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }}
-            cat kustomization.yaml
-      #- name: Commit kustomization
-      #  run: |
-      #      git config --local user.email "action@github.com"
-      #      git config --local user.name "GitHub Action"
-      #      git commit -a -m "${{ github.sha }}"
-      #- name: Push changes to current branch
-      #  uses: ad-m/github-push-action@master
-      #  with:
-      #      github_token: ${{ secrets.GITHUB_TOKEN }}
-      #      branch: $BRANCH_MAIN
-      #      force: true       
+            cat kustomization.yaml   
           
       - name: Install eksctl
         run: |
