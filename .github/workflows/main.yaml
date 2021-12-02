@@ -45,7 +45,6 @@ jobs:
           aws-region: us-east-2
       - name: Configure pipeline parameters
         run: |
-         cp params.yaml copy_params.yaml
          sed -i 's/"environment-replace"/"${{ steps.myref.outputs.branch }}"/' params.yaml
       - name: Pull latest data
         run: |
@@ -54,10 +53,6 @@ jobs:
       - name: Execute DVC pipeline
         run: |
           dvc repro -f
-      - name: Restore default parameters
-        run: |
-          rm params.yaml
-          mv copy_params.yaml params.yaml
           
       - name: Log in to Amazon ECR
         id: login-ecr
