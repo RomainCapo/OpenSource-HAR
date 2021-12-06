@@ -80,7 +80,7 @@ jobs:
          . <(eksctl completion bash)
       - name: Connect to cluster
         run: |
-          eksctl utils write-kubeconfig --cluster=opensource-stack-cluster
+          eksctl utils write-kubeconfig --cluster=opensource-stack
       - name: Apply new config
         run: |
           cd deploy/${{ steps.myref.outputs.branch }}
