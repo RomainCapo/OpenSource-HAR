@@ -40,5 +40,6 @@ jobs:
       - name: Install Python dependencies
         run: |
           pip show mlflow
+          ls /opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/mlflow/models
 
         
