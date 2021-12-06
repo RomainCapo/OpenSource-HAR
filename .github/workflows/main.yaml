@@ -28,4 +28,4 @@ jobs:
           python-version: 3.8
       - name: test
         run: |
-          ls /usr/local/lib
+          ls /miniconda/lib
