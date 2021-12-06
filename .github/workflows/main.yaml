@@ -56,6 +56,7 @@ jobs:
       - name: Log in to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+
       - name: Build Docker image
         run : |
           mlflow models build-docker -m "$(cat artifact_location.txt)" -n "rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }}"

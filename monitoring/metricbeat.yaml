@@ -25,10 +25,8 @@ data:
                 contains:
                   kubernetes.labels.app: "nginx"
               config:
-                - module: nginx
-                  metricsets: ["stubstatus"]
-                  enabled: true
-                  period: 5s
+                - module: http
+                  period: 10s
                   hosts: "main-node-nginx:8080"
                 - module: kubernetes
                   hosts: ["kube-state-metrics:8080"]
@@ -108,11 +106,6 @@ data:
       processors:
       - drop_event.when.regexp:
           system.filesystem.mount_point: '^/(sys|cgroup|proc|dev|etc|host|lib|snap)($|/)'
-    - module: nginx
-      metricsets: ["stubstatus"]
-      enabled: true
-      period: 5s
-      hosts: ["main-node-nginx:8080"]
   kubernetes.yml: |-
     - module: kubernetes
       metricsets:
