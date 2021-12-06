@@ -33,6 +33,6 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          ls /usr/local/lib/python3.8/dist-packages
+          pip show mlflow
 
         
