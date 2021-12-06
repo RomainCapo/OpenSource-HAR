@@ -1,20 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-  name: main-node
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: main-node
+      app: main-node-nginx
   template:
     metadata:
       labels:
-        app: main-node
+        app: main-node-nginx
     spec:
       containers:
-        - name: main-node
+        - name: main-node-nginx
           image: main-image
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+metadata:
+  name: main-node-nginx
+  annotations:
+    co.elastic.logs/module: nginx
+    co.elastic.logs/fileset.stdout: access
+    co.elastic.logs/fileset.stderr: error
+    co.elastic.metrics/module: nginx
+    co.elastic.metrics/metricsets: stubstatus
+    co.elastic.metrics/hosts: '${data.host}:8080'
+    co.elastic.metrics/period: 10s

@@ -1,6 +1,7 @@
 preprocess:
    window: 1200
    overlap: 600
+   classes: "rest-squat-step"
 train_test_evaluate:
    window: 1200
    overlap: 600
@@ -16,3 +17,4 @@ train_test_evaluate:
    test_subjects: "5-6"
    accuracy_thresold: 0.1
    environment: "environment-replace"
+   classes: "rest-squat-step"

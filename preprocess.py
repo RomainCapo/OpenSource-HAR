@@ -23,6 +23,8 @@ if len(sys.argv) != 2:
 # Test data set split ratio
 window = params["window"]
 overlap = params["overlap"] 
+classes = params["classes"].split("-")
+
 
 input = sys.argv[1]
 output_x_data = os.path.join("data", "prepared", "x_data.npy")
@@ -30,57 +32,56 @@ output_y_data = os.path.join("data", "prepared", "y_data.npy")
 output_subj_inputs = os.path.join("data", "prepared", "subj_inputs.npy")
 
 
-def create_dataset(dataset_dir, window, overlap):
-  """Create dataset as numpy array format from .mat file
+def create_dataset(dataset_dir, subject_index, classes, window, overlap):
+    """Create dataset as numpy array format from .mat file
 
     Args:
         dataset_dir (string): Directory where subjects folder are contained
+        subject_index (list): List of subjects index start from 0 for subject 1
+        classes (list): List of classes in string
         window (int): Sample length
         overlap (int): Window overlap
 
     Returns:
         tuple: Input data as numpy array format, Output data as numpy array format, Demarcation index of each subject in the numpy table 
     """
+  
+    x_data = np.empty((0, window, 4))
+    y_data = np.empty((0, 1))  # labels
+    subj_inputs = []  # number of inputs for every subject
+    tot_rows = 0
 
-  # Create the input and target data from PPG_ACC_dataset,
-  # according to window and overlap
-  subj_list = [1, 2, 3, 4, 5, 6, 7]  # 1-based
-  x_data = np.empty((0, window, 4))
-  y_data = np.empty((0, 1))  # labels
-  subj_inputs = []  # number of inputs for every subject
-  subj_index = []
+    for subject in subject_index:
+        subj_inputs.append(0)
+    
+        for category, name in enumerate(classes):
+            matrix_files = os.listdir(f"{dataset_dir}/S{str(subject + 1)}")      
+            num_class_files = len([file for file in matrix_files if name in file and file[-4:] == '.mat'])//2
 
-  # load data from PPG_ACC_dataset and reshape for RNN
-  tot_rows = 0
-  for subject in subj_list:
-    subj_inputs.append(0)
-    for category, name in enumerate(('rest', 'squat', 'step')):
-      for record in range(0, 5):
-        acc = scipy.io.loadmat(f'{dataset_dir}/S{subject}/{name}{record + 1}_acc.mat')['ACC']
-        ppg = scipy.io.loadmat(f'{dataset_dir}/S{subject}/{name}{record + 1}_ppg.mat')['PPG'][:, 0:2]  # some PPG files have 3 columns instead of 2
-        fusion = np.hstack((acc[:, 1:], ppg[:, 1:]))  # remove x axis (time)
-        tot_rows += len(fusion)
-        #clean_data(fusion)
+            for record in range(num_class_files):
+                acc = scipy.io.loadmat(f'{dataset_dir}/S{subject + 1}/{name}{record + 1}_acc.mat')['ACC']
+                ppg = scipy.io.loadmat(f'{dataset_dir}/S{subject + 1}/{name}{record + 1}_ppg.mat')['PPG'][:, 0:2]  # some PPG files have 3 columns instead of 2
+                fusion = np.hstack((acc[:, 1:], ppg[:, 1:]))  # remove x axis (time)
+                tot_rows += len(fusion)
 
-        # windowing
-        # compute number of windows (lazy way)
-        i = 0
-        num_w = 0
-        while i + window  <= len(fusion):
-          i += (window - overlap)
-          num_w += 1
-          subj_index.append(subject)
-        # compute actual windows
-        x_data_part = np.empty((num_w, window, 4))  # preallocate
-        i = 0
-        for w in range(0, num_w):
-          x_data_part[w] = fusion[i:i + window]
-          i += (window - overlap)
-        x_data = np.vstack((x_data, x_data_part))
-        y_data = np.vstack((y_data, np.full((num_w, 1), category)))
-        subj_inputs[-1] += num_w
+                # windowing
+                # compute number of windows (lazy way)
+                i = 0
+                num_w = 0
+                while i + window  <= len(fusion):
+                    i += (window - overlap)
+                    num_w += 1
+                # compute actual windows
+                x_data_part = np.empty((num_w, window, 4))  # preallocate
+                i = 0
+                for w in range(0, num_w):
+                    x_data_part[w] = fusion[i:i + window]
+                    i += (window - overlap)
+                x_data = np.vstack((x_data, x_data_part))
+                y_data = np.vstack((y_data, np.full((num_w, 1), category)))
+                subj_inputs[-1] += num_w
 
-  return x_data, y_data, subj_inputs
+    return x_data, y_data, subj_inputs
 
 def clean_data(x_data):
   """Clean input data. Replacement of the Nan values by an interpolated value of the two adjacent points.
@@ -176,7 +177,10 @@ def oversampling(x_data, y_data, subj_inputs, num_subjects):
 os.makedirs(os.path.join("data", "prepared"), exist_ok=True)
 
 if __name__ == "__main__":
-    x_data, y_data, subj_inputs = create_dataset(input, window, overlap)
+
+    subjects_index = list(range(len(os.listdir(input))))  
+
+    x_data, y_data, subj_inputs = create_dataset(input, subjects_index, classes, window, overlap)
 
     clean_data(x_data)
     x_data = normalize(x_data)

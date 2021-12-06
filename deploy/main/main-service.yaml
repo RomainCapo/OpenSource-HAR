@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: main-node
+  name: main-node-nginx
 spec:
   type: LoadBalancer
   selector:
-    app: main-node
+    app: main-node-nginx
   ports:
   - port: 8080
     targetPort: 8080
-    name: main-node
+    name: main-node-nginx

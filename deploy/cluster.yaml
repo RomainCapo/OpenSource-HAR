@@ -2,7 +2,7 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: opensource-stack-cluster
+  name: opensource-stack
   region: us-east-2
 
 nodeGroups:

@@ -46,6 +46,8 @@ hyperparameters["validation_subjects"] = tuple(map(int, params["validation_subje
 hyperparameters["test_subjects"] = tuple(map(int, params["test_subjects"].split("-")))
 hyperparameters["accuracy_thresold"] = params["accuracy_thresold"]
 hyperparameters["environment"] = params["environment"]
+hyperparameters["classes"] = params["classes"].split("-")
+
 
 input = sys.argv[1]
 x_data_input = os.path.join(sys.argv[1], "x_data.npy")
@@ -54,12 +56,10 @@ subj_inputs_input = os.path.join(sys.argv[1], "subj_inputs.npy")
 
 def create_model(hyperparameters, num_classes, num_features):
     """Create LSTM model.
-
     Args:
         args (argparse): Argparse arguments objects.
         num_classes (int): Number of classes.
         num_features (int): Number of input features
-
     Returns:
         tuple: Partionned input data, Partionned output data
     """
@@ -88,13 +88,11 @@ def create_model(hyperparameters, num_classes, num_features):
 
 def partition_data(subjects, subj_inputs, x_data, y_data):
   """Retrieval of subject data based on subject indices passed in parameters.
-
     Args:
         subjects (list): List of subjects index.
         subj_inputs (List): List of index subject separation in input data.
         x_data (np.array): Input data
         y_data (np.array): Output data
-
     Returns:
         tuple: Partionned input data, Partionned output data
   """
@@ -117,7 +115,6 @@ def partition_data(subjects, subj_inputs, x_data, y_data):
 
 def promotes_new_model(stage, model_name):
     """Archive all model wih the given stage and promotes the last one.
-
     Args:
         stage (string): Model stage
         model_name (string): Model name
@@ -165,6 +162,7 @@ if __name__ == "__main__":
         mlflow.log_param("overlap", hyperparameters["overlap"])
         mlflow.log_param("accuracy_thresold", hyperparameters["accuracy_thresold"])
         mlflow.log_param("environment", hyperparameters["environment"])
+        mlflow.log_param("classes", hyperparameters["classes"])
 
         num_classes = len(set(y_data.flatten()))
         num_features = x_data.shape[2]
