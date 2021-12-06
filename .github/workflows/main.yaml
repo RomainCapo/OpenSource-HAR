@@ -33,5 +33,5 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          ls /usr/local
+          ls /usr/local/lib/python3.8
         
