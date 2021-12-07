@@ -26,7 +26,7 @@ jobs:
       - uses: "actions/checkout@v2"
       - uses: "actions/setup-python@v2"
         with:
-          python-version: $PYTHON_VERSION
+          python-version:  ${{ env.PYTHON_VERSION }}
       - name: Get the current branch name
         shell: bash
         run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
@@ -40,6 +40,6 @@ jobs:
 
       - name: Test
         run: |
-          ls /opt/hostedtoolcache/Python/$(ls /opt/hostedtoolcache/ | grep $PYTHON_VERSION )
+          ls /opt/hostedtoolcache/Python/${{ env.PYTHON_VERSION }}
          
   
