@@ -40,6 +40,6 @@ jobs:
 
       - name: Test
         run: |
-          ls /opt/hostedtoolcache/Python/$(ls /opt/hostedtoolcache/Python/ | grep ^${{ env.PYTHON_VERSION }})/x64/lib/${{ env.PYTHON_VERSION }}
+          ls /opt/hostedtoolcache/Python/$(ls /opt/hostedtoolcache/Python/ | grep ^${{ env.PYTHON_VERSION }})/x64/lib/Python${{ env.PYTHON_VERSION }}
          
   
