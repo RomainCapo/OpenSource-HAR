@@ -37,4 +37,4 @@ jobs:
         run: |
           echo $GITHUB_BRANCH
           echo ${GITHUB_BRANCH}
-          echo ${{env.GITHUB_BRANCH}}
+          echo "${{env.GITHUB_BRANCH}}"
