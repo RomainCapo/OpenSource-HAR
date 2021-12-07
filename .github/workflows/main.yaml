@@ -18,9 +18,7 @@ env:
  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
- GITHUB_REF: ${{ github.ref }}
- GITHUB_BRANCH: ${GITHUB_REF##*/}
- IMAGE_NAME: rnn-model-image:${GITHUB_BRANCH}_${{ github.sha }} 
+ IMAGE_NAME: rnn-model-image
  PYTHON_VERSION: 3.8
 
 jobs: 
@@ -31,11 +29,68 @@ jobs:
       - uses: "actions/checkout@v2"
       - uses: "actions/setup-python@v2"
         with:
-          python-version: ${{ env.PYTHON_VERSION}}
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Get the current branch name
+        shell: bash
+        run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
+        id: myref      
 
       - name: Install Python dependencies
         run: |
-          sed -i 's/"environment-replace"/"$GIT_BRANCH"/' params.yaml
-        env: 
-          GIT_BRANCH: ${{ env.GITHUB_BRANCH }}
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+      - name: Configure pipeline parameters
+        run: |
+         sed -i 's/"environment-replace"/"${{ steps.myref.outputs.branch }}"/' params.yaml
+      - name: Pull latest data
+        run: |
+          dvc pull
+          ls data/PPG_ACC_dataset
+      - name: Execute DVC pipeline
+        run: |
+          dvc repro -f
+          
+      - name: Log in to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
+      - name: Update MLFlow docker file
+        run: |
+          rm /opt/hostedtoolcache/Python/$(ls /opt/hostedtoolcache/Python/ | grep ^${{ env.PYTHON_VERSION }})/x64/lib/Python${{ env.PYTHON_VERSION }}/site-packages/mlflow/models/docker_utils.py
+          cp monitoring/docker_utils.py /opt/hostedtoolcache/Python/$(ls /opt/hostedtoolcache/Python/ | grep ^${{ env.PYTHON_VERSION }})/x64/lib/Python${{ env.PYTHON_VERSION }}/site-packages/mlflow/models/docker_utils.py
+      - name: Build Docker image
+        run : |
+          mlflow models build-docker -m "$(cat artifact_location.txt)" -n "$IMAGE_NAME:${{ steps.myref.outputs.branch }}_${{ github.sha }}"
+      - name: Tag image
+        run: |
+          docker tag $IMAGE_NAME:${{ steps.myref.outputs.branch }}_${{ github.sha }} $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_NAME:${{ steps.myref.outputs.branch }}_${{ github.sha }}
+      - name: Push Docker image to ECR
+        run: |
+          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_NAME:${{ steps.myref.outputs.branch }}_${{ github.sha }}
+          
+      - name: Set image tag
+        run: |
+            cd deploy/${{ steps.myref.outputs.branch }}
+            kustomize edit set image ${{ steps.myref.outputs.branch }}-image=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_NAME:${{ steps.myref.outputs.branch }}_${{ github.sha }}
+            cat kustomization.yaml   
+          
+      - name: Install eksctl
+        run: |
+         curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+         sudo mv /tmp/eksctl /usr/local/bin
+         . <(eksctl completion bash)
+      - name: Connect to cluster
+        run: |
+          eksctl utils write-kubeconfig --cluster=opensource-stack
+      - name: Apply new config
+        run: |
+          cd deploy/${{ steps.myref.outputs.branch }}
+          kustomize build | kubectl replace --force -f -
+          
