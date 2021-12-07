@@ -16,7 +16,7 @@ env:
  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
  GITHUB_BRANCH: ${{ github.ref }}
  IMAGE_NAME: rnn-model-image:${GITHUB_BRANCH##*/}_${{ github.sha }} 
- PYTHON_VERSION: 3.8
+ PYTHON_VERSION: 3.8.12
 
 jobs: 
   run_cicd:
