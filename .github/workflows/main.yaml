@@ -20,7 +20,7 @@ env:
  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
  GITHUB_REF: ${{ github.ref }}
  GITHUB_BRANCH: ${GITHUB_REF##*/}
- IMAGE_NAME: rnn-model-image:${{ env.GITHUB_BRANCH }}_${{ github.sha }} 
+ IMAGE_NAME: rnn-model-image:${GITHUB_BRANCH}_${{ github.sha }} 
  PYTHON_VERSION: 3.8
 
 jobs: 
