@@ -27,6 +27,6 @@ jobs:
       - uses: "actions/checkout@v2"
 
       - name: Get the current branch name
-        run: echo ${{env.GITHUB_BRANCH}}
+        run: echo $GITHUB_BRANCH
          
   
