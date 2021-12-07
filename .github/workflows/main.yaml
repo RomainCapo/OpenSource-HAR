@@ -36,5 +36,5 @@ jobs:
       - name: Install Python dependencies
         run: |
           echo $GITHUB_BRANCH
-          echo ${{GITHUB_BRANCH}}
+          echo ${GITHUB_BRANCH}
           echo ${{en.GITHUB_BRANCH}}
