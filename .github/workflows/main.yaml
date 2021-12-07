@@ -35,6 +35,5 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          echo $GITHUB_BRANCH
-          echo ${GITHUB_BRANCH}
-          echo "${{env.GITHUB_BRANCH}}"
+          sed -i 's/"environment-replace"/"${{ env.GITHUB_BRANCH }}"/' params.yaml
+
