@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: development-node
+  name: development-node-nginx
 spec:
   type: LoadBalancer
   selector:
-    app: development-node
+    app: development-node-nginx
   ports:
   - port: 8080
     targetPort: 8080
-    name: development-node
+    name: development-node-nginx

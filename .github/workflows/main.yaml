@@ -2,10 +2,14 @@
 on:
   pull_request:
     branches:        
-    - main        
+    - main
+    - staging
+    - development        
   push:
     branches:
     - main
+    - staging
+    - development
 
 name: OpenSource Stack Ci/Cd
 
@@ -14,8 +18,10 @@ env:
  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
- GITHUB_BRANCH: ${{ github.ref }}
- IMAGE_NAME: rnn-model-image:${GITHUB_BRANCH##*/}_${{ github.sha }} 
+ GITHUB_REF: ${{ github.ref }}
+ GITHUB_BRANCH: ${GITHUB_REF##*/}
+ IMAGE_NAME: rnn-model-image:${{ env.GITHUB_BRANCH }}_${{ github.sha }} 
+ PYTHON_VERSION: 3.8
 
 jobs: 
   run_cicd:
@@ -25,26 +31,21 @@ jobs:
       - uses: "actions/checkout@v2"
       - uses: "actions/setup-python@v2"
         with:
-          python-version: 3.8
-      - name: Get the current branch name
-        shell: bash
-        run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
-        id: myref      
+          python-version: $PYTHON_VERSION
 
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install dvc[s3]
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-region: $AWS_DEFAULT_REGION
       - name: Configure pipeline parameters
         run: |
-         sed -i 's/"environment-replace"/"${{ steps.myref.outputs.branch }}"/' params.yaml
+         sed -i 's/"environment-replace"/"${{ env.GITHUB_BRANCH }}"/' params.yaml
       - name: Pull latest data
         run: |
           dvc pull
@@ -57,27 +58,24 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-<<<<<<< HEAD
-=======
       - name: Update MLFlow docker file
         run: |
-          rm /opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/mlflow/models/docker_utils.py
-          cp monitoring/docker_utils.py /opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/mlflow/models/docker_utils.py
->>>>>>> ab18083d788b4bb8f865468050a8750757fc5b9f
+          rm /opt/hostedtoolcache/Python/$(ls /opt/hostedtoolcache/Python/ | grep ^$PYTHON_VERSION)/x64/lib/Python$PYTHON_VERSION/site-packages/mlflow/models/docker_utils.py
+          cp monitoring/docker_utils.py /opt/hostedtoolcache/Python/$(ls /opt/hostedtoolcache/Python/ | grep ^$PYTHON_VERSION)/x64/lib/Python$PYTHON_VERSION/site-packages/mlflow/models/docker_utils.py
       - name: Build Docker image
         run : |
-          mlflow models build-docker -m "$(cat artifact_location.txt)" -n "rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }}"
+          mlflow models build-docker -m "$(cat artifact_location.txt)" -n "${{ env.IMAGE_NAME }}"
       - name: Tag image
         run: |
-          docker tag rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }} $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }}
+          docker tag ${{ env.IMAGE_NAME }} $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/${{ env.IMAGE_NAME }}
       - name: Push Docker image to ECR
         run: |
-          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }}
+          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/${{ env.IMAGE_NAME }}
           
       - name: Set image tag
         run: |
-            cd deploy/${{ steps.myref.outputs.branch }}
-            kustomize edit set image ${{ steps.myref.outputs.branch }}-image=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }}
+            cd deploy/${{ env.GITHUB_BRANCH }}
+            kustomize edit set image ${{ env.GITHUB_BRANCH }}-image=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/${{ env.IMAGE_NAME }}
             cat kustomization.yaml   
           
       - name: Install eksctl
@@ -87,9 +85,9 @@ jobs:
          . <(eksctl completion bash)
       - name: Connect to cluster
         run: |
-          eksctl utils write-kubeconfig --cluster=opensource-stack-cluster
+          eksctl utils write-kubeconfig --cluster=opensource-stack
       - name: Apply new config
         run: |
-          cd deploy/${{ steps.myref.outputs.branch }}
+          cd deploy/${{ env.GITHUB_BRANCH }}
           kustomize build | kubectl replace --force -f -
           

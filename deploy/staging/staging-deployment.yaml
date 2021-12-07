@@ -1,19 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: staging-node
+  name: staging-node-nginx
+  annotations:
+    co.elastic.logs/module: nginx
+    co.elastic.logs/fileset.stdout: access
+    co.elastic.logs/fileset.stderr: error
+    co.elastic.metrics/module: nginx
+    co.elastic.metrics/metricsets: stubstatus
+    co.elastic.metrics/hosts: '${data.host}:8080'
+    co.elastic.metrics/period: 10s
+metadata:
+  name: staging-node-nginx
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: staging-node
+      app: staging-node-nginx
   template:
     metadata:
       labels:
-        app: staging-node
+        app: staging-node-nginx
     spec:
       containers:
-        - name: staging-node
+        - name: staging-node-nginx
           image: staging-image
           imagePullPolicy: Always
           ports:
