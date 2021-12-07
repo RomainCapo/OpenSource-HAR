@@ -45,7 +45,7 @@ jobs:
           aws-region: ${{ env.AWS_DEFAULT_REGION}}
       - name: Configure pipeline parameters
         run: |
-         sed -i 's/"environment-replace"/"${{ env.GITHUB_BRANCH }}"/' params.yaml
+         sed -i 's/"environment-replace"/"${GITHUB_BRANCH}"/' params.yaml
       - name: Pull latest data
         run: |
           dvc pull
