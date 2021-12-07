@@ -16,7 +16,7 @@ env:
  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
  GITHUB_BRANCH: ${{ github.ref }}
  IMAGE_NAME: rnn-model-image:${GITHUB_BRANCH##*/}_${{ github.sha }} 
- PYTHON_VERSION: 3.8.12
+ PYTHON_VERSION: 3.8
 
 jobs: 
   run_cicd:
@@ -40,6 +40,6 @@ jobs:
 
       - name: Test
         run: |
-          ls /opt/hostedtoolcache/Python/${{ env.PYTHON_VERSION }}/x64/lib
+          ls /opt/hostedtoolcache/Python/$(ls /opt/hostedtoolcache/Python/ | grep ^${{ env.PYTHON_VERSION }})/x64/lib/${{ env.PYTHON_VERSION }}
          
   
