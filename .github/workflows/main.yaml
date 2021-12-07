@@ -39,6 +39,6 @@ jobs:
 
       - name: Test
         run: |
-          ls /opt/hostedtoolcache/
+          ls /opt/hostedtoolcache/Python
          
   
