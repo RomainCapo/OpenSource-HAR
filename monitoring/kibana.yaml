@@ -4,7 +4,11 @@ kind: Kibana
 metadata:
   name: kibana
 spec:
-  version: 7.6.1
+  version: 7.14.0
   count: 1
   elasticsearchRef:
     name: opensource-stack
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true

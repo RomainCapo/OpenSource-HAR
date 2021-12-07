@@ -57,6 +57,13 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+<<<<<<< HEAD
+=======
+      - name: Update MLFlow docker file
+        run: |
+          rm /opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/mlflow/models/docker_utils.py
+          cp monitoring/docker_utils.py /opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/mlflow/models/docker_utils.py
+>>>>>>> ab18083d788b4bb8f865468050a8750757fc5b9f
       - name: Build Docker image
         run : |
           mlflow models build-docker -m "$(cat artifact_location.txt)" -n "rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }}"

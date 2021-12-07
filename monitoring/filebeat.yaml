@@ -8,6 +8,10 @@ metadata:
     k8s-app: filebeat
 data:
   filebeat.yml: |-
+    setup.kibana.username: ${ELASTICSEARCH_USERNAME}
+    setup.kibana.password: ${ELASTICSEARCH_PASSWORD}
+    setup.kibana.host: "kibana-kb-http:5601"
+    setup.dashboards.enabled: true
     filebeat.autodiscover:
       providers:
         - type: kubernetes
@@ -80,7 +84,7 @@ spec:
         - name: ELASTICSEARCH_USERNAME
           value: elastic
         - name: ELASTICSEARCH_PASSWORD
-          value: x4dq7trt6wv5jnwwzfthl88v 
+          value: 6PN98QmqoF27sdc9Z8Q88Y6Y 
         - name: ELASTIC_CLOUD_ID
           value:
         - name: ELASTIC_CLOUD_AUTH

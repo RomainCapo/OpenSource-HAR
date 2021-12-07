@@ -39,9 +39,9 @@ WORKDIR /opt/mlflow
 
 {install_mlflow}
 
-RUN rm -rf /miniconda/lib/python3.9/site-packages/mlflow/models/container/scoring_server/nginx.conf
+RUN rm -rf /miniconda/lib/$(ls /miniconda/lib | grep ^python)/site-packages/mlflow/models/container/scoring_server/nginx.conf
 
-ADD https://raw.githubusercontent.com/RomainCapo/OpenSource-HAR/main/monitoring/nginx.conf /miniconda/lib/python3.9/site-packages/mlflow/models/container/scoring_server/
+RUN export current=$(pwd); cd /miniconda/lib/$(ls /miniconda/lib | grep ^python)/site-packages/mlflow/models/container/scoring_server ; curl https://raw.githubusercontent.com/RomainCapo/OpenSource-HAR/main/monitoring/nginx.conf > nginx.conf; cd $current
 
 {custom_setup_steps}
 {entrypoint}
