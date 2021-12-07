@@ -36,57 +36,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install dvc[s3]
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
-      - name: Configure pipeline parameters
-        run: |
-         sed -i 's/"environment-replace"/"${{ steps.myref.outputs.branch }}"/' params.yaml
-      - name: Pull latest data
-        run: |
-          dvc pull
-          ls data/PPG_ACC_dataset
-      - name: Execute DVC pipeline
-        run: |
-          dvc repro -f
-          
-      - name: Log in to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Update MLFlow docker file
+      - name: Test
         run: |
-          rm /opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/mlflow/models/docker_utils.py
-          cp monitoring/docker_utils.py /opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/mlflow/models/docker_utils.py
-      - name: Build Docker image
-        run : |
-          mlflow models build-docker -m "$(cat artifact_location.txt)" -n "rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }}"
-      - name: Tag image
-        run: |
-          docker tag rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }} $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }}
-      - name: Push Docker image to ECR
-        run: |
-          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }}
-          
-      - name: Set image tag
-        run: |
-            cd deploy/${{ steps.myref.outputs.branch }}
-            kustomize edit set image ${{ steps.myref.outputs.branch }}-image=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/rnn-model-image:${{ steps.myref.outputs.branch }}_${{ github.sha }}
-            cat kustomization.yaml   
-          
-      - name: Install eksctl
-        run: |
-         curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-         sudo mv /tmp/eksctl /usr/local/bin
-         . <(eksctl completion bash)
-      - name: Connect to cluster
-        run: |
-          eksctl utils write-kubeconfig --cluster=opensource-stack
-      - name: Apply new config
-        run: |
-          cd deploy/${{ steps.myref.outputs.branch }}
-          kustomize build | kubectl replace --force -f -
-          
+          ls opt/hostedtoolcache/
+         
+  
