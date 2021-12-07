@@ -23,7 +23,7 @@ from sklearn.preprocessing import StandardScaler
 
 from har_test.har_test import *
 
-params = yaml.safe_load(open("params.yaml"))["train_test_evaluate"]
+params = yaml.safe_load(open("params.yaml"))["train_test_evaluate"] 
 
 if len(sys.argv) != 2:
     sys.stderr.write("Arguments error. Usage:\n")
