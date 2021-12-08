@@ -1,10 +1,12 @@
 # build.yml
-on:       
+on:  
+  pull_request_target:
+   branches:
+      - main
+      - staging
   push:
     branches:
       - development
-      - staging
-      - main
 
 name: OpenSource Stack Ci/Cd
 
