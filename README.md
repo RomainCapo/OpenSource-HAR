@@ -1,5 +1,5 @@
 # OpenSource-HAR
-MLOps worflow with : 
+Demonstration of a MLOps workflow with a Human Activity Recognition project. The following tools were used : 
   - DVC
   - MLFLow
   - GitHub Action
