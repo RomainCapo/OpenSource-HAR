@@ -21,7 +21,11 @@ from tensorflow.keras.optimizers import Adam
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 from sklearn.preprocessing import StandardScaler
 
-from har_test.har_test import *
+sys.path.insert(1, os.path.abspath(os.getcwd()) + '/har')
+sys.path.insert(1, os.path.abspath(os.getcwd()) + '/har_test')
+
+from har import partition_data
+from har_test import *
 
 params = yaml.safe_load(open("params.yaml"))["train_test_evaluate"] 
 
@@ -85,33 +89,6 @@ def create_model(hyperparameters, num_classes, num_features):
     
     model.compile(loss=SparseCategoricalCrossentropy(from_logits=True), optimizer=optimizer, metrics=['accuracy'])
     return model 
-
-def partition_data(subjects, subj_inputs, x_data, y_data):
-  """Retrieval of subject data based on subject indices passed in parameters.
-    Args:
-        subjects (list): List of subjects index.
-        subj_inputs (List): List of index subject separation in input data.
-        x_data (np.array): Input data
-        y_data (np.array): Output data
-    Returns:
-        tuple: Partionned input data, Partionned output data
-  """
-
-  # subjects = tuple (0-based)
-  x_part = None
-  y_part = None
-  for subj in subjects:
-    skip = sum(subj_inputs[:subj])
-    num = subj_inputs[subj]
-    xx = x_data[skip : skip + num]
-    yy = y_data[skip : skip + num]
-    if x_part is None:
-      x_part = xx.copy()
-      y_part = yy.copy()
-    else:
-      x_part = np.vstack((x_part, xx))  # vstack creates a copy of the data
-      y_part = np.vstack((y_part, yy))
-  return x_part, y_part
 
 def promotes_new_model(stage, model_name):
     """Archive all model wih the given stage and promotes the last one.

@@ -1,15 +1,15 @@
 schema: '2.0'
 stages:
   preprocess:
-    cmd: python preprocess.py data/PPG_ACC_dataset
+    cmd: python pipeline/preprocess.py data/PPG_ACC_dataset
     deps:
     - path: data/PPG_ACC_dataset
       md5: 13003bc220d37c3f965c4123072f17a4.dir
       size: 50912445
       nfiles: 420
-    - path: preprocess.py
-      md5: bf6e94792db0798de2aec137b036ce0e
-      size: 7170
+    - path: pipeline/preprocess.py
+      md5: da66ab0b26ef80423e5ef2eeab27a151
+      size: 1449
     params:
       params.yaml:
         preprocess.overlap: 600
@@ -44,15 +44,15 @@ stages:
         train.validation_subjects: '4'
         train.window: 1200
   train_test_evaluate:
-    cmd: python train_test_evaluate.py data/prepared
+    cmd: python pipeline/train_test_evaluate.py data/prepared
     deps:
     - path: data/prepared
       md5: bd31f6feb9744216875cddab4a2a8d68.dir
       size: 858534464
       nfiles: 3
-    - path: train_test_evaluate.py
-      md5: d26e08ee7a9551f6bea637a38a11ae7d
-      size: 9771
+    - path: pipeline/train_test_evaluate.py
+      md5: b6fe555e918e62cbd56185e4ebfb9b59
+      size: 9020
     params:
       params.yaml:
         train_test_evaluate.accuracy_thresold: 0.1
