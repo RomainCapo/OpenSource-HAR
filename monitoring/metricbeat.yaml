@@ -32,7 +32,7 @@ data:
                   metricsets: ["stubstatus"]
                   enabled: true
                   period: 5s
-                  hosts: "main-node-nginx:8080"
+                  hosts: ["main-node-nginx:8080", "development-node-nginx:8080", "staging-node-nginx:8080"]
                 - module: kubernetes
                   hosts: ["kube-state-metrics:8080"]
                   period: 10s
@@ -178,7 +178,7 @@ spec:
         - name: ELASTICSEARCH_USERNAME
           value: elastic
         - name: ELASTICSEARCH_PASSWORD
-          value: 6PN98QmqoF27sdc9Z8Q88Y6Y 
+          value: qFa5sPO44Rg18H49ab0f98MW 
         - name: ELASTIC_CLOUD_ID
           value:
         - name: ELASTIC_CLOUD_AUTH

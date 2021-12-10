@@ -11,6 +11,7 @@ import pandas as p
 import yaml
 import mlflow
 import tensorflow as tf
+import subprocess
 
 from mlflow.tracking import client
 from mlflow.models.signature import infer_signature
@@ -109,6 +110,9 @@ def promotes_new_model(stage, model_name):
 
     mlflowclient.transition_model_version_stage(model_name, max_version, stage=stage)
 
+def get_git_revision_hash():
+  return subprocess.check_output(['git', 'rev-parse', 'HEAD']).decode('ascii').strip()
+
 if __name__ == "__main__":
     mlflow.set_tracking_uri('http://deplo-mlflo-5bgwmw63yikr-a96d79bfc9da58f5.elb.us-east-2.amazonaws.com/')
 
@@ -140,6 +144,7 @@ if __name__ == "__main__":
         mlflow.log_param("accuracy_thresold", hyperparameters["accuracy_thresold"])
         mlflow.log_param("environment", hyperparameters["environment"])
         mlflow.log_param("classes", hyperparameters["classes"])
+        mlflow.log_param("data_version", get_git_revision_hash())
 
         num_classes = len(set(y_data.flatten()))
         num_features = x_data.shape[2]

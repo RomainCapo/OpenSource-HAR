@@ -5,6 +5,8 @@ on:
       - development
       - main
       - staging
+# schedule:
+#    - cron:  '* * 1 * *' # Run the pipeline one time a day
 
 name: OpenSource Stack Ci/Cd
 
