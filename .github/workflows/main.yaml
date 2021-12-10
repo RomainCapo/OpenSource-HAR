@@ -60,6 +60,7 @@ jobs:
 
       - name: Update MLFlow docker file
         run: |
+          sed -i 's/nginx_file/https://raw.githubusercontent.com/RomainCapo/OpenSource-HAR/${{ steps.myref.outputs.branch }}/monitoring/nginx.conf'
           rm /opt/hostedtoolcache/Python/$(ls /opt/hostedtoolcache/Python/ | grep ^${{ env.PYTHON_VERSION }})/x64/lib/python${{ env.PYTHON_VERSION }}/site-packages/mlflow/models/docker_utils.py
           cp monitoring/docker_utils.py /opt/hostedtoolcache/Python/$(ls /opt/hostedtoolcache/Python/ | grep ^${{ env.PYTHON_VERSION }})/x64/lib/python${{ env.PYTHON_VERSION }}/site-packages/mlflow/models/docker_utils.py
       - name: Build Docker image
