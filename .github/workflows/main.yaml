@@ -17,6 +17,7 @@ env:
  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
  IMAGE_NAME: rnn-model-image
  PYTHON_VERSION: 3.8
+ INPUT_DATA: s3://opensource-stack-input-data/PPG_ACC_dataset
 
 jobs: 
   run_cicd:
@@ -48,11 +49,15 @@ jobs:
          sed -i 's/"environment-replace"/"${{ steps.myref.outputs.branch }}"/' params.yaml
       - name: Pull latest data
         run: |
-          dvc pull
+          cd data/
+          dvc import-url ${{ env.INPUT_DATA }}
           ls data/PPG_ACC_dataset
       - name: Execute DVC pipeline
         run: |
           dvc repro -f
+      -name: Push latest data to remote
+          dvc add data/PPG_ACC_dataset.dvc
+          dvc push
           
       - name: Log in to Amazon ECR
         id: login-ecr
