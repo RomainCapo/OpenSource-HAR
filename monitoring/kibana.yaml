@@ -12,4 +12,6 @@ spec:
     tls:
       selfSignedCertificate:
         disabled: true
-xpack.security.enabled: false
+  config:
+    elasticsearch.username: "elastic"
+    elasticsearch.password: "2ap2vR8TVcaI44oBH2G297v0"

@@ -16,4 +16,3 @@ spec:
     tls:
       selfSignedCertificate:
         disabled: true
-xpack.security.enabled: false
