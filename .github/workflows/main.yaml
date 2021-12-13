@@ -55,7 +55,7 @@ jobs:
       - name: Execute DVC pipeline
         run: |
           dvc repro -f
-      -name: Push latest data to remote
+      - name: Push latest data to remote
         run: |
           dvc add data/PPG_ACC_dataset.dvc
           dvc push
