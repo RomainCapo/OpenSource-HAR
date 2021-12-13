@@ -51,7 +51,6 @@ jobs:
         run: |
           cd data/
           dvc import-url ${{ env.INPUT_DATA }}
-          ls data/PPG_ACC_dataset
       - name: Execute DVC pipeline
         run: |
           dvc repro -f
