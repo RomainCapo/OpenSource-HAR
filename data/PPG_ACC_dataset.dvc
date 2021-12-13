@@ -1,5 +1,12 @@
 outs:
-- md5: 13003bc220d37c3f965c4123072f17a4.dir
-  size: 50912445
-  nfiles: 420
+- md5: 097c8c91ad68cdde81a88ef345ef60ae.dir
+  size: 50893965
+  nfiles: 210
   path: PPG_ACC_dataset
+md5: 947ca86f4dea0f954dca9067563b442b
+frozen: true
+deps:
+- md5: 1e996b4608d982dc04aa954b7a135971.dir
+  size: 50893965
+  nfiles: 210
+  path: s3://opensource-stack-input-data/PPG_ACC_dataset
