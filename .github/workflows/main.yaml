@@ -56,7 +56,6 @@ jobs:
           dvc repro -f
       - name: Push latest data to remote
         run: |
-          dvc add data/PPG_ACC_dataset.dvc
           dvc push
           
       - name: Log in to Amazon ECR
