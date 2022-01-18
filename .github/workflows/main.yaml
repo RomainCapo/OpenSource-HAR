@@ -17,7 +17,7 @@ env:
  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
  IMAGE_NAME: rnn-model-image
  PYTHON_VERSION: 3.8
- INPUT_DATA: s3://opensource-stack-input-data/PPG_ACC_dataset
+ INPUT_DATA: s3://opensource-stack-input-data/PPG_ACC_dataset 
 
 jobs: 
   run_cicd:
