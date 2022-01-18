@@ -56,6 +56,7 @@ jobs:
       - name: Execute DVC pipeline
         run: |
           dvc repro -f
+          echo $(cat pipeline/artifact_location.txt)
       - name: Push latest data to remote
         run: |
           rm params.yaml
