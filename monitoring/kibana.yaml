@@ -12,3 +12,6 @@ spec:
     tls:
       selfSignedCertificate:
         disabled: true
+  config:
+    elasticsearch.username: "elastic"
+    elasticsearch.password: "7rMmXCJ8386SO33W961UNnFj"
