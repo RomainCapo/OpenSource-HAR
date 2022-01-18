@@ -3,10 +3,18 @@ outs:
   size: 50893965
   nfiles: 210
   path: PPG_ACC_dataset
+<<<<<<< HEAD
 md5: 1c36e24e54420252e5f24467a9fa8578
+=======
+md5: 947ca86f4dea0f954dca9067563b442b
+>>>>>>> 265bcab29684ecc804096e94e4f0d70c320ab3a9
 frozen: true
 deps:
 - md5: 1e996b4608d982dc04aa954b7a135971.dir
   size: 50893965
   nfiles: 210
+<<<<<<< HEAD
   path: s3://opensource-stack-input-data/PPG_ACC_dataset/
+=======
+  path: s3://opensource-stack-input-data/PPG_ACC_dataset
+>>>>>>> 265bcab29684ecc804096e94e4f0d70c320ab3a9
