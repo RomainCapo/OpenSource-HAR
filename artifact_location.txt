@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-s3://mlflow-artifacts-424710357996/1/a2a0dc756b8b4e0faf25f07dac161707/artifacts/rnn-model
-=======
-s3://mlflow-artifacts-424710357996/1/8d38158eed7c456daac86dcc14354815/artifacts/rnn-model
->>>>>>> d25081d3aad72b24b8ffb0a80806f0aba225e054
+s3://mlflow-artifacts-424710357996/1/84a208b3307d4464a7125f498eb3dc83/artifacts/rnn-model
