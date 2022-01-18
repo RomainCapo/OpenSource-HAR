@@ -124,9 +124,9 @@ if __name__ == "__main__":
     x_data_validation, y_data_validation = partition_data(hyperparameters["validation_subjects"], subj_inputs, x_data, y_data)
     x_data_test, y_data_test = partition_data(hyperparameters["test_subjects"], subj_inputs, x_data, y_data)
 
-    model_name = "rnn-model"
+    model_name = "lstm-model"
 
-    mlflow.set_experiment("rnn-model-experiment")
+    mlflow.set_experiment("lstm-model-experiment")
 
     with mlflow.start_run(run_name='lstm_har') as run:
         mlflow.log_param("epochs", hyperparameters["epochs"])
