@@ -192,6 +192,7 @@ if __name__ == "__main__":
             os.remove(artifact_file)
 
           with open(artifact_file,"w+") as f:
+            print(run.info.artifact_uri + "/" + model_name)
             f.write(run.info.artifact_uri + "/" + model_name)
 
           if hyperparameters["environment"] == "development":
