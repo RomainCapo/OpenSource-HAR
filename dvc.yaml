@@ -1,19 +1,19 @@
 stages:
   preprocess:
-    cmd: python preprocess.py data/PPG_ACC_dataset
+    cmd: python pipeline/preprocess.py data/PPG_ACC_dataset
     deps:
     - data/PPG_ACC_dataset
-    - preprocess.py
+    - pipeline/preprocess.py
     params:
     - preprocess.overlap
     - preprocess.window
     outs:
     - data/prepared
   train_test_evaluate:
-    cmd: python train_test_evaluate.py data/prepared
+    cmd: python pipeline/train_test_evaluate.py data/prepared
     deps:
     - data/prepared
-    - train_test_evaluate.py
+    - pipeline/train_test_evaluate.py
     params:
     - train_test_evaluate.accuracy_thresold
     - train_test_evaluate.dropout_rate

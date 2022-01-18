@@ -1,1 +1,1 @@
-s3://mlflow-artifacts-424710357996/1/801ee480574c48c394337892b6b16e47/artifacts/rnn-model
+s3://mlflow-artifacts-424710357996/2/54292aa350a04bd1a83298e3a643717c/artifacts/lstm-model

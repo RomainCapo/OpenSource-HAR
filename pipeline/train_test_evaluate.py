@@ -11,6 +11,7 @@ import pandas as p
 import yaml
 import mlflow
 import tensorflow as tf
+import subprocess
 
 from mlflow.tracking import client
 from mlflow.models.signature import infer_signature
@@ -21,7 +22,11 @@ from tensorflow.keras.optimizers import Adam
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 from sklearn.preprocessing import StandardScaler
 
-from har_test.har_test import *
+sys.path.insert(1, os.path.abspath(os.getcwd()) + '/har')
+sys.path.insert(1, os.path.abspath(os.getcwd()) + '/har_test')
+
+from har import partition_data
+from har_test import *
 
 params = yaml.safe_load(open("params.yaml"))["train_test_evaluate"] 
 
@@ -86,33 +91,6 @@ def create_model(hyperparameters, num_classes, num_features):
     model.compile(loss=SparseCategoricalCrossentropy(from_logits=True), optimizer=optimizer, metrics=['accuracy'])
     return model 
 
-def partition_data(subjects, subj_inputs, x_data, y_data):
-  """Retrieval of subject data based on subject indices passed in parameters.
-    Args:
-        subjects (list): List of subjects index.
-        subj_inputs (List): List of index subject separation in input data.
-        x_data (np.array): Input data
-        y_data (np.array): Output data
-    Returns:
-        tuple: Partionned input data, Partionned output data
-  """
-
-  # subjects = tuple (0-based)
-  x_part = None
-  y_part = None
-  for subj in subjects:
-    skip = sum(subj_inputs[:subj])
-    num = subj_inputs[subj]
-    xx = x_data[skip : skip + num]
-    yy = y_data[skip : skip + num]
-    if x_part is None:
-      x_part = xx.copy()
-      y_part = yy.copy()
-    else:
-      x_part = np.vstack((x_part, xx))  # vstack creates a copy of the data
-      y_part = np.vstack((y_part, yy))
-  return x_part, y_part
-
 def promotes_new_model(stage, model_name):
     """Archive all model wih the given stage and promotes the last one.
     Args:
@@ -132,8 +110,11 @@ def promotes_new_model(stage, model_name):
 
     mlflowclient.transition_model_version_stage(model_name, max_version, stage=stage)
 
+def get_git_revision_hash():
+  return subprocess.check_output(['git', 'rev-parse', 'HEAD']).decode('ascii').strip()
+
 if __name__ == "__main__":
-    mlflow.set_tracking_uri('http://deplo-mlflo-5bgwmw63yikr-a96d79bfc9da58f5.elb.us-east-2.amazonaws.com/')
+    mlflow.set_tracking_uri('http://deplo-mlflo-1p22nih6q2lu7-c65dca21bf641533.elb.us-east-2.amazonaws.com/')
 
     x_data = np.load(x_data_input)
     y_data = np.load(y_data_input)
@@ -143,9 +124,9 @@ if __name__ == "__main__":
     x_data_validation, y_data_validation = partition_data(hyperparameters["validation_subjects"], subj_inputs, x_data, y_data)
     x_data_test, y_data_test = partition_data(hyperparameters["test_subjects"], subj_inputs, x_data, y_data)
 
-    model_name = "rnn-model"
+    model_name = "lstm-model"
 
-    mlflow.set_experiment("rnn-model-experiment")
+    mlflow.set_experiment("lstm-model-experiment")
 
     with mlflow.start_run(run_name='lstm_har') as run:
         mlflow.log_param("epochs", hyperparameters["epochs"])
@@ -163,6 +144,7 @@ if __name__ == "__main__":
         mlflow.log_param("accuracy_thresold", hyperparameters["accuracy_thresold"])
         mlflow.log_param("environment", hyperparameters["environment"])
         mlflow.log_param("classes", hyperparameters["classes"])
+        mlflow.log_param("data_version", get_git_revision_hash())
 
         num_classes = len(set(y_data.flatten()))
         num_features = x_data.shape[2]
@@ -210,6 +192,7 @@ if __name__ == "__main__":
             os.remove(artifact_file)
 
           with open(artifact_file,"w+") as f:
+            print(run.info.artifact_uri + "/" + model_name)
             f.write(run.info.artifact_uri + "/" + model_name)
 
           if hyperparameters["environment"] == "development":

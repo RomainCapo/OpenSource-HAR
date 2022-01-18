@@ -1,0 +1,781 @@
+[33mcommit a83c128276093f7e17a63c24d04be68e2766074c[m[33m ([m[1;36mHEAD -> [m[1;32mdevelopment[m[33m, [m[1;31morigin/development[m[33m)[m
+Merge: cbd1783 388c262
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Thu Dec 9 09:38:26 2021 +0100
+
+    merge
+
+[33mcommit cbd1783735b24733bfe060b80190fb5921e04c0f[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Thu Dec 9 09:36:55 2021 +0100
+
+    refactor file tree
+
+[33mcommit 388c262adcc098bf20e9ddd1dc6d11cd978edde2[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Wed Dec 8 11:11:56 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 6fb662774aaaab60c3073ebfcd3914dcf73a8f1d[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Wed Dec 8 11:10:50 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 82c51a24b88da6e9623e572252c2184f5686f513[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Wed Dec 8 10:50:36 2021 +0100
+
+    Update README.md
+
+[33mcommit 46a6e7a2822dc5f21d4b702890f3217a13aa749a[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Wed Dec 8 10:47:43 2021 +0100
+
+    Update README.md
+
+[33mcommit 621c33583790b7f38369ddc781cd6c5f3dc95f03[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Wed Dec 8 10:21:05 2021 +0100
+
+    Update main.yaml
+
+[33mcommit c588b4b66b8c231912e4ea16f024d512a4a19c40[m
+Merge: dbceb83 4c63e96
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Wed Dec 8 09:57:53 2021 +0100
+
+    Merge branch 'staging' into development
+
+[33mcommit dbceb8385a70813a9f3a14d5e4043cd03a9a1c4f[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Wed Dec 8 09:56:22 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 4c63e96691faf121e7756de611cacaf63384baec[m
+Merge: 251f7c2 374fa7f
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 16:30:40 2021 +0100
+
+    Merge branch 'main' into staging
+
+[33mcommit 251f7c2cf84b8db29a5f2beddb0a5ae5cc074a66[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 16:29:46 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 514d893f35081a6596ef1c38805f38221b997c65[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 16:29:21 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 374fa7fec4abd13c2c6df9830560d60e9524738c[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 16:28:51 2021 +0100
+
+    Update main.yaml
+
+[33mcommit d4be1b37c18ee5cd4b967877ed58db521426ba65[m
+Merge: 01dac28 7a00336
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 16:14:08 2021 +0100
+
+    Merge pull request #1 from RomainCapo/development
+    
+    test staging pipeline
+
+[33mcommit 7a00336a9a854c86a1f69884d7009afb14a85214[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Tue Dec 7 15:56:34 2021 +0100
+
+    test development pipeline
+
+[33mcommit 01dac28ebf776900915f4c0ece847e5b9f44472e[m[33m ([m[1;32mstaging[m[33m, [m[1;32mmain[m[33m)[m
+Merge: db7249d 53e0fef
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Tue Dec 7 15:53:58 2021 +0100
+
+    merge
+
+[33mcommit db7249d483f21beeab6ccf5162787610fd321a0d[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Tue Dec 7 15:53:10 2021 +0100
+
+    update kustomization file
+
+[33mcommit 53e0fefe697fa2ad9848451d42c7aeda647f7457[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 14:20:14 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 602cf0dd684699b81f56b4b6e2592f629ade9865[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 14:14:03 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 6bc9f1578e5b85d052fc550a29e349ae80873124[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 14:08:44 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 8722185ee13e64ac7cb6474740ee72fd302691db[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 14:05:57 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 126ce32f237ff1aae9fafc5cf4f292ea39a0b8a5[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 14:04:55 2021 +0100
+
+    Update main.yaml
+
+[33mcommit b516faaff11355aea50a843aa4d9d6a25df4f5c0[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 14:04:05 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 8a283e4bfe43ec78ec770fb7a1c121376979834a[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 14:03:42 2021 +0100
+
+    Update main.yaml
+
+[33mcommit da75ca86d84e45e50cc417fa9642524a1ae9499f[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 14:03:15 2021 +0100
+
+    Update main.yaml
+
+[33mcommit e270eb835164f405b881da8e9f05aa5774754545[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 13:58:06 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 0105a8e8055a6cf21ac0bb9bb39cc364dc91fc61[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 13:54:27 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 85bc8d3998e44874dc4032c580ad5e4b396bcd69[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 13:51:49 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 8686a481feb7012a87ac05ef30c77a9a941781d5[m
+Merge: ad443cf b6fed49
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Tue Dec 7 13:49:21 2021 +0100
+
+    Merge branch 'main' of https://github.com/RomainCapo/OpenSource-HAR into main
+
+[33mcommit ad443cfcb57e621157f7f9855a7e26788dd9016a[m
+Merge: fafa36d 221e190
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Tue Dec 7 13:49:17 2021 +0100
+
+    update GitHub Actions
+
+[33mcommit b6fed4903ed86495feb742a9b08eca9ee91ba15e[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 13:48:53 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 50ce7add1bbcf7c3d756f08718d6c0a31db7f917[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 13:40:48 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 9bc49d70abd1c2cc34ee405e842a8572c5640911[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 13:37:55 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 39d0ff8258dba40ba5ce4ba30736bba5994d3ff4[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 13:33:55 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 7222482dc8f9504d253e8a834b79211e2a53e58b[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 13:31:12 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 9abf76e227d5547a51b5e4d05586758a0a85c6b6[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 13:29:54 2021 +0100
+
+    Update main.yaml
+
+[33mcommit e8c90fbf3f8c431d9bfea85e1deb057154ecf31c[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 13:18:13 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 2b848d1aaa818db73ebf06739c0164bc1f6b50b3[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 13:15:28 2021 +0100
+
+    Update main.yaml
+
+[33mcommit b0fdeed9b0d5fd5ed0a489ff33414725e42a958b[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 13:12:03 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 7f17e8c6fbd03189718342a046502b6478959419[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 13:05:55 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 713d7c498f0011233a90395e13c797dc128cffc0[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 12:15:39 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 26781a8cf36276effc394a14d807723c3cfa2ad9[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 12:14:45 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 7766a91a9769e19311b5d59a63bb358057fb47e8[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 12:13:22 2021 +0100
+
+    Update main.yaml
+
+[33mcommit f3afde2e581bb9bd3c8c39564d464ca7a601bedf[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 12:12:10 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 7e611ab7cebed1c0ff306302c974eef0a405c4cf[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 12:07:54 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 30a915ac56d253b517dfe97c1f76316711f07ac0[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 12:05:30 2021 +0100
+
+    Update main.yaml
+
+[33mcommit c919626bd82cdabab9a91dcb37495a405b080f2d[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Dec 7 12:02:47 2021 +0100
+
+    Update main.yaml
+
+[33mcommit fafa36d4a1d5acdd3043f160bffba1104fcb4b59[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Tue Dec 7 11:59:34 2021 +0100
+
+    update build-docker function
+
+[33mcommit 221e1908b6e564ff9cb33ec2ed7efff0faa32181[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Dec 6 16:25:38 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 2f946ecb5b23ec1077c5362d9e42ead129bce72d[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Dec 6 16:03:08 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 73a2e7d32cc07373062b8d809a21a3a2cbc9771f[m
+Merge: 1dad1fd ab18083
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Mon Dec 6 15:42:41 2021 +0100
+
+    merge
+
+[33mcommit 1dad1fd26d3d41b37e5c557ee46fc765ecf01195[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Mon Dec 6 15:41:34 2021 +0100
+
+    update actions
+
+[33mcommit ab18083d788b4bb8f865468050a8750757fc5b9f[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Dec 6 15:41:06 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 947ef180d1d46b3a71bc1eccec09b43b97041a07[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Dec 6 15:37:01 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 5d22a9c5eabc1e19567ef490c69981dff9a9e81e[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Dec 6 15:32:48 2021 +0100
+
+    Update main.yaml
+
+[33mcommit d68f85a6d393e19bda9976d972791be2a34064dd[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Dec 6 15:31:53 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 695d3c0bf76d328ce2dff89a7a9747e9e72d74d8[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Dec 6 15:28:49 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 5276f82ec04c34b526644d362af3295a0b1140e7[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Dec 6 15:28:05 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 1942ecee0bc83bfce58ba47aa4606ee5106382fa[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Dec 6 15:27:17 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 9f40c9d0818dc7bb4f172f3b512a4a6997fefea4[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Dec 6 12:15:22 2021 +0100
+
+    Create nginx.conf
+
+[33mcommit 4ab1d2b7c5bb27e41ca383312a803f1c2a6799f6[m
+Merge: 138e2df 3e062a6
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Mon Dec 6 12:14:08 2021 +0100
+
+    Merge branch 'main' of https://github.com/RomainCapo/OpenSource-HAR into main
+
+[33mcommit 3e062a66a311612653e6dcdb582d84c583ccfdac[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Dec 6 12:13:48 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 138e2dfbe7e8fef94fa1249809eb2a759935704f[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Mon Dec 6 12:13:11 2021 +0100
+
+    add multiclass support
+
+[33mcommit bfe191e0103b875a3a219132e1bb4e9003515fbf[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Dec 6 11:52:42 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 0acc31dfd23a0199ce8ee9b2c363dab6d977c8fa[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Dec 6 11:51:59 2021 +0100
+
+    Update main.yaml
+
+[33mcommit d71223d10fdfd5310115c0f80249d32847052a22[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Dec 6 11:50:16 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 1f922a41ac35632b189ff7adf6933a1d1a0fc83c[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Thu Dec 2 10:47:58 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 09e5d01dc5e2f17036418e14c93857c2eeabb230[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Thu Dec 2 10:39:39 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 3f633b363b02f961f96b05d82ac68d72f2823d7a[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Mon Nov 29 14:32:28 2021 +0100
+
+    update github actions structure
+
+[33mcommit b98fedeb4e35b308a1b55f692d1c205e62e7b770[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Nov 29 13:59:09 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 196b20187230207d63529a236335b920fbbe8ae2[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Nov 29 13:44:40 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 38f879443f21f82e4494e358635314a3648e652b[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Nov 29 13:26:19 2021 +0100
+
+    Update main.yaml
+
+[33mcommit f8f4301b768522b01a026ad21e1ed63b83915824[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Nov 29 10:56:56 2021 +0100
+
+    Update main.yaml
+
+[33mcommit cd28038f511d4dee23f018e81a4da4167a320e5e[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Nov 29 10:43:14 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 8e5bf53a306911f5e0c6c1050d4a7c828901506a[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Nov 29 10:38:06 2021 +0100
+
+    Update main.yaml
+
+[33mcommit a33ddffd74000a9fe42c8cf3e3713b2e0220159f[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Nov 29 10:36:18 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 4eb2a695f57f278e287fb3b8ee43b4e60e28e76f[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Nov 29 10:32:18 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 015b2b1be3eb77a6c00fc8c771cae2fa418e59a7[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Nov 29 10:31:00 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 3fada3effc87a079f48795abe8fe1cccd61d8da7[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Nov 29 10:27:08 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 1518fe472b5e85ceb78d072a67e0b0c05404c275[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Nov 29 10:24:31 2021 +0100
+
+    Update main.yaml
+
+[33mcommit c9edeb668d90d6a94a49758a95e0bb2fbd0b23a4[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Nov 29 10:22:19 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 36799be893c714daed4f9748f066a732e661ef95[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Nov 29 10:20:30 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 1ee249496d82f8eda4c69a111c31eb20a5e69e4a[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Nov 29 10:12:49 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 1e7f68cc5126f73c4693b196a2df55af8e5847e6[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Mon Nov 29 10:08:25 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 96f7ba6e8796d8a1388a9aaea201f13b5a8e582d[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Mon Nov 29 10:06:38 2021 +0100
+
+    add environment management in Github Actions
+
+[33mcommit 2b539113ed4243f9cac1ddf64f81ee23eed6b352[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Mon Nov 29 09:32:59 2021 +0100
+
+    add environment management¨
+
+[33mcommit dc7bc6c96d09ee54bbdc3a250f2a7cc06d0a8ffe[m
+Author: GitHub Action <action@github.com>
+Date:   Fri Nov 26 12:27:53 2021 +0000
+
+    79bd671eff244c36141680be3063440f3732b8dc
+
+[33mcommit 79bd671eff244c36141680be3063440f3732b8dc[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Fri Nov 26 13:12:06 2021 +0100
+
+    Create kustomization.yaml
+
+[33mcommit a1fabd9561914a7a08d8ca7668a24f82fd3e09d7[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Fri Nov 26 13:09:42 2021 +0100
+
+    Delete kustomization.yaml
+
+[33mcommit 5ea497d8b50f18c06b90bee721f9ff773ff6ffeb[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Fri Nov 26 12:08:24 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 0dcbfc7c00a68b15b491bb41295d6b433c724218[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Fri Nov 26 12:06:39 2021 +0100
+
+    Create kustomization.yaml
+
+[33mcommit a76f35c88fe6869d4aa181c7a3e85ee260245405[m
+Merge: b935815 908ad7a
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Fri Nov 26 11:46:44 2021 +0100
+
+    Merge branch 'main' of https://github.com/RomainCapo/OpenSource-HAR into main
+
+[33mcommit b935815aaa81b888e9cf16ca44e71ee53866e11f[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Fri Nov 26 11:46:40 2021 +0100
+
+    add kubernetes files
+
+[33mcommit 908ad7ae59e94a279bfcd5ff0cc25f2471318b25[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Fri Nov 26 11:46:15 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 7231c981b8b66491a209282a822cb89563dbe01f[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Fri Nov 26 11:38:34 2021 +0100
+
+    Update main.yaml
+
+[33mcommit be0c07d14799f01879d20c9ebabf2b98fb9af475[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Fri Nov 26 11:36:18 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 546243c7d568b56bba20ba0fed7aedcc16a2be24[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Fri Nov 26 11:35:10 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 98b85a7064e6c2ca5e8505a65427f110903855a7[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Thu Nov 25 16:49:41 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 845a2a03c95f44a1b77b0cea6a3c717181683ee6[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Thu Nov 25 16:36:23 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 35df151517387e771ba9d6cd045fd8a1c31fd489[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Thu Nov 25 16:30:09 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 8d13c82a3342678fa516ea883c6c1c0d0eedd46a[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Thu Nov 25 16:24:55 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 8f3b8bca4c4ebb2c6e32fa447a346bfbe62e7d5a[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Thu Nov 25 16:20:36 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 78652d80a3a1dcfa5919e864f0ffaf03a47ad0de[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Thu Nov 25 16:15:43 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 829f504527a8a6095d24368a58cb63db7bce8075[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Thu Nov 25 15:36:00 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 49dd1fc9de79b3fcf8cd15494b476fbde6bf472f[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Thu Nov 25 15:29:59 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 9e1b19de3731e4dcf932045198a73fd80e06c707[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Thu Nov 25 15:28:42 2021 +0100
+
+    Update main.yaml
+
+[33mcommit e7353926c11de080bcba0f8e96354c741d77abfe[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Thu Nov 25 15:07:43 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 0c743b57c702ae05abc62b07e94027726f4cce15[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Thu Nov 25 14:26:26 2021 +0100
+
+    update actions
+
+[33mcommit f14dd5a761a03d62a13505d5ec5f4effc144afd5[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Thu Nov 25 14:19:32 2021 +0100
+
+    update github actions
+
+[33mcommit 5fd4596ca3a954a7ec7eb63937c5aae4f9ddba43[m
+Merge: c3b2656 df18473
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Thu Nov 25 14:13:29 2021 +0100
+
+    Merge branch 'main' of https://github.com/RomainCapo/OpenSource-HAR into main
+
+[33mcommit c3b2656509301f0529fd730bc54c9393ef66af81[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Thu Nov 25 14:13:26 2021 +0100
+
+    update train script
+
+[33mcommit df184736a90f3056ab1cbea94fd628ce0311af1e[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Thu Nov 25 14:13:01 2021 +0100
+
+    Update main.yaml
+
+[33mcommit ffd57a8e2bad0406fe68ae0ba4b556a935a625a8[m
+Merge: 8fb4806 21b4374
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Thu Nov 25 13:28:45 2021 +0100
+
+    Merge branch 'main' of https://github.com/RomainCapo/OpenSource-HAR into main
+
+[33mcommit 8fb4806ba70c2064576914c27ebb88b39ebb9c1c[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Thu Nov 25 13:28:42 2021 +0100
+
+    update train script
+
+[33mcommit 21b43740165f58437295792532026c4d5215217a[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Thu Nov 25 13:11:50 2021 +0100
+
+    Update main.yaml
+
+[33mcommit ceb1791e328275fcd43c408febb96d67a092def3[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Thu Nov 25 11:45:03 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 85c34d86a245a5f18ae7f4cb1146b329f4d2329d[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Thu Nov 25 11:42:37 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 23e9ea205972871cc95d5b491d608e5867c512a5[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Thu Nov 25 11:39:22 2021 +0100
+
+    Update main.yaml
+
+[33mcommit 067db23aec1ad3611c688d91a487c2945376979d[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Thu Nov 25 11:31:15 2021 +0100
+
+    test actions
+
+[33mcommit 7b59f8eb4f5569f6cc5a2edfd2461250ffe01618[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Thu Nov 25 11:30:42 2021 +0100
+
+    test actions
+
+[33mcommit 7779a7f7a3f15f9726df190cc92e007ba35f4078[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Thu Nov 25 11:29:37 2021 +0100
+
+    add workflow folder
+
+[33mcommit 3e561a4d7d57eeefbb90c8cf818fb8d86de23485[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Thu Nov 25 11:27:01 2021 +0100
+
+    test actions
+
+[33mcommit 030b9fa31b18f6c6dcc6f4691bec3e459903505c[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Thu Nov 25 11:25:29 2021 +0100
+
+    add base github actions
+
+[33mcommit 34e500db67420f4a26b49c208c3886e63aad2c9a[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Thu Nov 25 10:51:58 2021 +0100
+
+    add files
+
+[33mcommit 4c0140e9cae4d6fb8c52c9cdf5620a12e9febd95[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Wed Nov 24 10:48:41 2021 +0100
+
+    Configure remote storage
+
+[33mcommit d774da0edc5fb527f8d327da88dc12c0c70a8d2b[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Wed Nov 24 10:48:02 2021 +0100
+
+    Add raw data
+
+[33mcommit 15bec757403ac3a74abf2a4d760642dba4afc157[m
+Author: RomainCapo <romain.capocasale99@gmail.com>
+Date:   Wed Nov 24 09:17:07 2021 +0100
+
+    Initialize DVC
+
+[33mcommit 8f3ba764c905e59663c2fac35960d05b1daf0085[m
+Author: Romain <RomainCapo@users.noreply.github.com>
+Date:   Tue Nov 23 14:33:35 2021 +0100
+
+    Initial commit

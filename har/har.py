@@ -1,36 +1,17 @@
-import io
-import os
-import random
-import re
-import sys
-import xml.etree.ElementTree 
+from sklearn.preprocessing import StandardScaler
+
 import numpy as np
 import scipy.io
 import scipy.signal
-import pandas as p
-import yaml
+import pandas as pd
 
 from sklearn.preprocessing import StandardScaler
 
-
-params = yaml.safe_load(open("params.yaml"))["preprocess"]
-
-if len(sys.argv) != 2:
-    sys.stderr.write("Arguments error. Usage:\n")
-    sys.stderr.write("\tpython prepare.py data-file\n")
-    sys.exit(1)
-
-# Test data set split ratio
-window = params["window"]
-overlap = params["overlap"] 
-classes = params["classes"].split("-")
-
-
-input = sys.argv[1]
-output_x_data = os.path.join("data", "prepared", "x_data.npy")
-output_y_data = os.path.join("data", "prepared", "y_data.npy")
-output_subj_inputs = os.path.join("data", "prepared", "subj_inputs.npy")
-
+import numpy as np
+import scipy.io
+import scipy.signal
+import pandas as pd
+import os
 
 def create_dataset(dataset_dir, subject_index, classes, window, overlap):
     """Create dataset as numpy array format from .mat file
@@ -174,18 +155,29 @@ def oversampling(x_data, y_data, subj_inputs, num_subjects):
 
   return x_data_over, y_data_over, subj_inputs_over
 
-os.makedirs(os.path.join("data", "prepared"), exist_ok=True)
+def partition_data(subjects, subj_inputs, x_data, y_data):
+  """Retrieval of subject data based on subject indices passed in parameters.
+    Args:
+        subjects (list): List of subjects index.
+        subj_inputs (List): List of index subject separation in input data.
+        x_data (np.array): Input data
+        y_data (np.array): Output data
+    Returns:
+        tuple: Partionned input data, Partionned output data
+  """
 
-if __name__ == "__main__":
-
-    subjects_index = list(range(len(os.listdir(input))))  
-
-    x_data, y_data, subj_inputs = create_dataset(input, subjects_index, classes, window, overlap)
-
-    clean_data(x_data)
-    x_data = normalize(x_data)
-    x_data, y_data, subj_inputs = oversampling(x_data, y_data, subj_inputs, 5)
-
-    np.save(output_x_data, x_data)
-    np.save(output_y_data, y_data)
-    np.save(output_subj_inputs, subj_inputs)
+  # subjects = tuple (0-based)
+  x_part = None
+  y_part = None
+  for subj in subjects:
+    skip = sum(subj_inputs[:subj])
+    num = subj_inputs[subj]
+    xx = x_data[skip : skip + num]
+    yy = y_data[skip : skip + num]
+    if x_part is None:
+      x_part = xx.copy()
+      y_part = yy.copy()
+    else:
+      x_part = np.vstack((x_part, xx))  # vstack creates a copy of the data
+      y_part = np.vstack((y_part, yy))
+  return x_part, y_part

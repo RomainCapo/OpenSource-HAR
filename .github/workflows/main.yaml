@@ -1,10 +1,12 @@
 # build.yml
-on:      
+on:
   push:
     branches:
-    - main
-    - staging
-    - development
+      - development
+      - main
+      - staging
+# schedule:
+#    - cron:  '* * 1 * *' # Run the pipeline one time a day
 
 name: OpenSource Stack Ci/Cd
 
@@ -15,6 +17,7 @@ env:
  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
  IMAGE_NAME: rnn-model-image
  PYTHON_VERSION: 3.8
+ INPUT_DATA: s3://opensource-stack-input-data/PPG_ACC_dataset 
 
 jobs: 
   run_cicd:
@@ -43,14 +46,35 @@ jobs:
           aws-region: ${{ env.AWS_DEFAULT_REGION }}
       - name: Configure pipeline parameters
         run: |
-         sed -i 's/"environment-replace"/"${{ steps.myref.outputs.branch }}"/' params.yaml
+          cp params.yaml copy_params.yaml
+          sed -i 's/"environment-replace"/"${{ steps.myref.outputs.branch }}"/' params.yaml
       - name: Pull latest data
         run: |
-          dvc pull
-          ls data/PPG_ACC_dataset
+          cd data/
+          dvc import-url ${{ env.INPUT_DATA }}
+          ls .
       - name: Execute DVC pipeline
         run: |
           dvc repro -f
+          echo $(cat artifact_location.txt)
+      - name: Push latest data to remote
+        run: |
+          rm params.yaml
+          mv copy_params.yaml params.yaml
+          dvc push
+
+      - name: Commit new data
+        run: |
+           git config --local user.email "action@github.com"
+           git config --local user.name "GitHub Action"
+           git add data/PPG_ACC_dataset.dvc
+           git commit -a -m "${{ github.sha }}"
+      - name: Push changes to current branch
+        uses: ad-m/github-push-action@master
+        with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           branch: ${{ steps.myref.outputs.branch }}
+           force: true  
           
       - name: Log in to Amazon ECR
         id: login-ecr
@@ -58,6 +82,7 @@ jobs:
 
       - name: Update MLFlow docker file
         run: |
+          sed -i 's#nginx_file#https://raw.githubusercontent.com/RomainCapo/OpenSource-HAR/${{ steps.myref.outputs.branch }}/monitoring/nginx.conf#' monitoring/docker_utils.py
           rm /opt/hostedtoolcache/Python/$(ls /opt/hostedtoolcache/Python/ | grep ^${{ env.PYTHON_VERSION }})/x64/lib/python${{ env.PYTHON_VERSION }}/site-packages/mlflow/models/docker_utils.py
           cp monitoring/docker_utils.py /opt/hostedtoolcache/Python/$(ls /opt/hostedtoolcache/Python/ | grep ^${{ env.PYTHON_VERSION }})/x64/lib/python${{ env.PYTHON_VERSION }}/site-packages/mlflow/models/docker_utils.py
       - name: Build Docker image
