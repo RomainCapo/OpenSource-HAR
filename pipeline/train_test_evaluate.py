@@ -114,7 +114,7 @@ def get_git_revision_hash():
   return subprocess.check_output(['git', 'rev-parse', 'HEAD']).decode('ascii').strip()
 
 if __name__ == "__main__":
-    mlflow.set_tracking_uri('http://deplo-mlflo-5bgwmw63yikr-a96d79bfc9da58f5.elb.us-east-2.amazonaws.com/')
+    mlflow.set_tracking_uri('http://deplo-mlflo-1p22nih6q2lu7-c65dca21bf641533.elb.us-east-2.amazonaws.com/')
 
     x_data = np.load(x_data_input)
     y_data = np.load(y_data_input)

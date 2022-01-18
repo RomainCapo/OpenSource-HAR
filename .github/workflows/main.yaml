@@ -66,6 +66,7 @@ jobs:
         run: |
             git config --local user.email "action@github.com"
             git config --local user.name "GitHub Action"
+            git add data/PPG_ACC_dataset.dvc
             git commit -a -m "${{ github.sha }}"
       - name: Push changes to current branch
         uses: ad-m/github-push-action@master

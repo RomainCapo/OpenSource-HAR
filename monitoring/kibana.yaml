@@ -14,4 +14,4 @@ spec:
         disabled: true
   config:
     elasticsearch.username: "elastic"
-    elasticsearch.password: "2ap2vR8TVcaI44oBH2G297v0"
+    elasticsearch.password: "7rMmXCJ8386SO33W961UNnFj"
